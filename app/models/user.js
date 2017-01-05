@@ -7,6 +7,7 @@ const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   password: { type: String },
   lastSearch: { type: String },
+  events: [{ type: String }],
 });
 
 // Encrypt password before saving
