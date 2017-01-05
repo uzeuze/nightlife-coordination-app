@@ -16,6 +16,12 @@ class SearchForm extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.searchTerm && nextProps.lastSearch) {
+      this.setState({ searchTerm: nextProps.lastSearch });
+    }
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     this.props.onSubmit(this.state.searchTerm);

@@ -67,7 +67,6 @@ export function hideAuthModal() {
 
 
 export function getUser() {
-  console.log(localStorage.getItem('token'));
   return (dispatch) => {
     axios.get(`${API_URL}/api/user`,
       {
