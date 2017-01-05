@@ -14,8 +14,8 @@ router.post('/signin', requireSignin, authenticationController.signin);
 router.post('/signup', authenticationController.signup);
 
 // Search
-router.post('/search', searchController.find);
-
+router.get('/search', searchController.find);
+router.get('/auth/search', requireAuth, searchController.find);
 // User
 router.get('/user', requireAuth, usersController.getUser);
 

@@ -16,10 +16,21 @@ class Welcome extends Component {
 
   handleSubmit(term) {
     const searchTerm = term.trim();
-    axios.post(`http://localhost:3000/api/search?q=${searchTerm}`)
-      .then((response) => {
-        this.setState({ businesses: response.data.businesses });
-      });
+    if (this.props.authenticated) {
+      axios.get(`http://localhost:3000/api/auth/search?q=${searchTerm}`,
+        {
+          headers: { authorization: localStorage.getItem('token') }
+        }
+      )
+        .then((response) => {
+          this.setState({ businesses: response.data.businesses });
+        });
+    } else {
+      axios.get(`http://localhost:3000/api/search?q=${searchTerm}`)
+        .then((response) => {
+          this.setState({ businesses: response.data.businesses });
+        });
+    }
   }
 
   render() {
