@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { getUser } from '../actions';
 
 class Profile extends Component {
@@ -11,9 +12,18 @@ class Profile extends Component {
     if(!this.props.user) {
       return <div>Loading...</div>
     }
+    const { email, lastSearch } = this.props.user;
+
     return (
       <div className="Profile">
-        <h1>{this.props.user.email}</h1>
+        <h1>{email}</h1>
+        <div>
+          <span>Last search:</span>
+          <Link to='/'>{lastSearch}</Link>
+        </div>
+        <div>
+          <h2>My Events</h2>
+        </div>
       </div>
     );
   }
