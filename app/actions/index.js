@@ -7,6 +7,7 @@ import {
   CLEAR_AUTH_ERROR,
   HIDE_AUTH_MODAL,
   AUTH_MODAL,
+  GET_USER,
 } from './types';
 
 const API_URL = 'http://localhost:3000';
@@ -24,7 +25,7 @@ export function loginUser({ email, password }) {
       .then((response) => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem('token', response.data.token);
-        browserHistory.push('/profile');
+        browserHistory.push('/');
       })
       .catch(() => {
         dispatch(authError('Incorrect password or email'));
@@ -38,7 +39,7 @@ export function signUpUser({ email, password }) {
       .then((response) => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem('token', response.data.token);
-        browserHistory.push('/profile');
+        browserHistory.push('/');
       })
       .catch((err) => {
         dispatch(authError(err.response.data.error));
@@ -62,4 +63,22 @@ export function showAuthModal(modalName) {
 
 export function hideAuthModal() {
   return { type: HIDE_AUTH_MODAL };
+}
+
+
+export function getUser() {
+  console.log(localStorage.getItem('token'));
+  return (dispatch) => {
+    axios.get(`${API_URL}/api/user`,
+      {
+        headers: { authorization: localStorage.getItem('token') }
+      }
+    )
+      .then((response) => {
+        dispatch({
+          type: GET_USER,
+          payload: response.data,
+        });
+      });
+  };
 }

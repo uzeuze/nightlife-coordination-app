@@ -25,7 +25,7 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
 // JWT Strategy
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-  secretOrKey: process.env.SECRET,
+  secretOrKey: process.env.SECRET
 };
 
 const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
@@ -34,9 +34,10 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
     if (err) { return done(err); }
 
     if (user) {
-      return done(null, user);
+      done(null, user);
+    } else {
+      done(null, false);
     }
-    return done(null, false);
   });
 });
 

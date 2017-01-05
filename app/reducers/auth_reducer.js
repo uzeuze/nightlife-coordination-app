@@ -5,16 +5,20 @@ import {
   CLEAR_AUTH_ERROR,
   AUTH_MODAL,
   HIDE_AUTH_MODAL,
+  GET_USER,
 } from '../actions/types';
 
 const INITIAL_STATE = {
   authenticated: false,
   error: '',
   modal: '',
+  user: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case GET_USER:
+      return { ...state, user: action.payload };
     case AUTH_USER:
       return { ...state, error: '', authenticated: true, modal: '' };
     case AUTH_ERROR:
