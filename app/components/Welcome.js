@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
+import BusinessList from './BusinessList';
 import SearchForm from './SearchForm';
 
 class Welcome extends Component {
@@ -21,24 +22,13 @@ class Welcome extends Component {
       });
   }
 
-  renderBusinesses() {
-    const businesses = this.state.businesses.map((business) => {
-      return (
-        <li key={business.id}>{business.name}</li>
-      );
-    });
-    return businesses;
-  }
-
   render() {
     return (
       <div className="Welcome">
         <div className="Welcome_search container">
           <SearchForm onSubmit={this.handleSubmit} />
         </div>
-        <ul>
-          {this.renderBusinesses()}
-        </ul>
+        <BusinessList businesses={this.state.businesses} />
       </div>
     );
   }
