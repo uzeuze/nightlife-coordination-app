@@ -22,12 +22,10 @@ class Welcome extends Component {
   componentDidMount() {
     if (this.props.authenticated && this.props.user === null) {
       this.props.getUser();
-      console.log('did get')
     }
 
     if (this.props.user && this.props.user.lastSearch && !this.state.lastSearch ) {
       this.handleSubmit(this.props.user.lastSearch);
-      console.log('did submit')
     }
   }
 
@@ -35,7 +33,6 @@ class Welcome extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.authenticated && nextProps.user === null) {
       this.props.getUser();
-      console.log('props get')
     }
 
     if (nextProps.authenticated && this.state.lastSearch) {
@@ -44,7 +41,6 @@ class Welcome extends Component {
 
     if (nextProps.user && nextProps.user.lastSearch && !this.state.lastSearch ) {
       this.handleSubmit(nextProps.user.lastSearch);
-      console.log('props submit')
     }
   }
 
