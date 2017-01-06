@@ -72,7 +72,7 @@ class Welcome extends Component {
     if (this.state.loading) {
       return (
         <div>Loading...</div>
-      );    
+      );
     } else {
       return (
         <BusinessList businesses={this.state.businesses} />
@@ -83,6 +83,9 @@ class Welcome extends Component {
   render() {
     return (
       <div className="Welcome">
+        <div className="Welcome__header">
+          <h1 className="Welcome__header_text text-center">DISCOVER BEST PLACES IN YOUR AREA</h1>
+        </div>
         <div className="Welcome_search container">
           <SearchForm onSubmit={this.handleSubmit} lastSearch={this.state.lastSearch}/>
         </div>

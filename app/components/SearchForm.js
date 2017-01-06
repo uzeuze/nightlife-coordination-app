@@ -40,6 +40,7 @@ class SearchForm extends Component {
               type="text"
               value={this.state.searchTerm}
               onChange={this.handleChange}
+              placeholder="Enter a city"
             />
             <InputGroup.Addon onClick={this.handleSubmit}>
               <Glyphicon glyph="search" />
