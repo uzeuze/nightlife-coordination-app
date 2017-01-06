@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import {
+  Grid,
+  Row,
+  Col
+} from 'react-bootstrap';
 import { showAuthModal } from '../actions';
 
 class BusinessItem extends Component {
@@ -54,9 +59,9 @@ class BusinessItem extends Component {
         <div>
           <span>Want to go?</span>
           { this.props.user ?
-            <button className="btn btn-success" onClick={this.handleJoin.bind(this, business.name)}>JOIN</button>
+            <button className="BusinessItem__join_button btn btn-success" onClick={this.handleJoin.bind(this, business.name)}>JOIN</button>
             :
-            <button className="btn btn-success" onClick={this.showSignUpModal.bind(this)}>JOIN</button>
+            <button className="BusinessItem__join_button btn btn-success" onClick={this.showSignUpModal.bind(this)}>JOIN</button>
           }
         </div>
       );
@@ -67,15 +72,19 @@ class BusinessItem extends Component {
     const { business } = this.props;
     return (
       <div className="BusinessItem well container">
-        <div>
-          <img src={business.image_url} />
-        </div>
-        <div>
-          {business.name}
-        </div>
-        <div><img src={business.rating_img_url} /></div>
-        <p>{business.snippet_text}</p>
-        {this.renderButton(business)}
+        <Grid>
+          <Row>
+            <Col sm={2}>
+              <img src={business.image_url} />
+            </Col>
+            <Col sm={10}>
+              <h4>{business.name}</h4>
+              <div><img src={business.rating_img_url} /></div>
+              <p>{business.snippet_text}</p>
+              {this.renderButton(business)}
+            </Col>
+          </Row>
+        </Grid>
       </div>
     );
   }

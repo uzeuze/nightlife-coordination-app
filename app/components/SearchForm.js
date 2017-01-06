@@ -33,7 +33,7 @@ class SearchForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="SearchForm">
         <FormGroup>
           <InputGroup>
             <FormControl
