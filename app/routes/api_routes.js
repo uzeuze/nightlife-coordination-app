@@ -19,6 +19,6 @@ router.get('/auth/search', requireAuth, searchController.find);
 // User
 router.get('/user', requireAuth, usersController.getUser);
 router.post('/user/going', requireAuth, usersController.joinEvent);
-router.delete('/user/going', requireAuth, usersController.removeEvent);
+router.post('/user/leave', requireAuth, usersController.removeEvent);
 
 module.exports = router;
