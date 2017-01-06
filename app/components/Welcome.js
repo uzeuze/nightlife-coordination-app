@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import spinnerImg from '../../public/assets/spinner.svg';
 import { getUser } from '../actions';
 
 import BusinessList from './BusinessList';
@@ -71,7 +72,9 @@ class Welcome extends Component {
   renderBusinesses() {
     if (this.state.loading) {
       return (
-        <div>Loading...</div>
+        <div className="text-center">
+          <img src={spinnerImg} />
+        </div>
       );
     } else {
       return (
