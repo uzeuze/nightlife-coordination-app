@@ -6,6 +6,7 @@ import { getUser } from '../actions';
 
 import BusinessList from './BusinessList';
 import SearchForm from './SearchForm';
+import { API_URL } from '../../config';
 
 class Welcome extends Component {
   constructor() {
@@ -52,7 +53,7 @@ class Welcome extends Component {
     this.setState({ lastSearch: searchTerm, loading: true });
     if (searchTerm) {
       if (this.props.authenticated) {
-        axios.get(`http://localhost:3000/api/auth/search?q=${searchTerm}`,
+        axios.get(`${API_URL}/api/auth/search?q=${searchTerm}`,
           {
             headers: { authorization: localStorage.getItem('token') }
           }
@@ -61,7 +62,7 @@ class Welcome extends Component {
             this.setState({ businesses: response.data.businesses, loading: false });
           });
       } else {
-        axios.get(`http://localhost:3000/api/search?q=${searchTerm}`)
+        axios.get(`${API_URL}/api/search?q=${searchTerm}`)
           .then((response) => {
             this.setState({ businesses: response.data.businesses, loading: false });
           });

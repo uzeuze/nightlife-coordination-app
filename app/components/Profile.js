@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import axios from 'axios';
 import { getUser } from '../actions';
 import spinnerImg from '../../public/assets/spinner.svg';
+import { API_URL } from '../../config';
 
 class Profile extends Component {
   componentWillMount() {
@@ -11,7 +12,7 @@ class Profile extends Component {
   }
 
   handleLeave(business) {
-    axios.post('http://localhost:3000/api/user/leave', { business },
+    axios.post(`${API_URL}/api/user/leave`, { business },
       {
         headers: { authorization: localStorage.getItem('token') }
       }

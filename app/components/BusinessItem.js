@@ -7,6 +7,7 @@ import {
   Col
 } from 'react-bootstrap';
 import { showAuthModal } from '../actions';
+import { API_URL } from '../../config';
 
 class BusinessItem extends Component {
   constructor() {
@@ -24,7 +25,7 @@ class BusinessItem extends Component {
   }
 
   handleJoin(business) {
-    axios.post('http://localhost:3000/api/user/going', { business },
+    axios.post(`${API_URL}/api/user/going`, { business },
       {
         headers: { authorization: localStorage.getItem('token') }
       }
@@ -34,7 +35,7 @@ class BusinessItem extends Component {
   }
 
   handleLeave(business) {
-    axios.post('http://localhost:3000/api/user/leave', { business },
+    axios.post(`${API_URL}/api/user/leave`, { business },
       {
         headers: { authorization: localStorage.getItem('token') }
       }
