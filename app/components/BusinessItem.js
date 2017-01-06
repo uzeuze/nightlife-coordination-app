@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { showAuthModal } from '../actions';
 
 class BusinessItem extends Component {
   constructor() {
@@ -37,6 +38,10 @@ class BusinessItem extends Component {
     })
   }
 
+  showSignUpModal() {
+    this.props.showAuthModal('signUp');
+  }
+
   renderButton(business) {
     if(this.state.going) {
       return(
@@ -48,7 +53,11 @@ class BusinessItem extends Component {
       return (
         <div>
           <span>Want to go?</span>
-          <button className="btn btn-success" onClick={this.handleJoin.bind(this, business.name)}>JOIN</button>
+          { this.props.user ?
+            <button className="btn btn-success" onClick={this.handleJoin.bind(this, business.name)}>JOIN</button>
+            :
+            <button className="btn btn-success" onClick={this.showSignUpModal.bind(this)}>JOIN</button>
+          }
         </div>
       );
     }
@@ -78,4 +87,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(BusinessItem);
+export default connect(mapStateToProps, { showAuthModal })(BusinessItem);
