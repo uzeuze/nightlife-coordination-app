@@ -11,7 +11,8 @@ class Welcome extends Component {
     super();
     this.state = {
       businesses: [],
-      lastSearch: ''
+      lastSearch: '',
+      loading: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -47,7 +48,7 @@ class Welcome extends Component {
 
   handleSubmit(term) {
     const searchTerm = term.trim();
-    this.setState({ lastSearch: searchTerm });
+    this.setState({ lastSearch: searchTerm, loading: true });
     if (searchTerm) {
       if (this.props.authenticated) {
         axios.get(`http://localhost:3000/api/auth/search?q=${searchTerm}`,
@@ -56,14 +57,26 @@ class Welcome extends Component {
           }
         )
           .then((response) => {
-            this.setState({ businesses: response.data.businesses });
+            this.setState({ businesses: response.data.businesses, loading: false });
           });
       } else {
         axios.get(`http://localhost:3000/api/search?q=${searchTerm}`)
           .then((response) => {
-            this.setState({ businesses: response.data.businesses });
+            this.setState({ businesses: response.data.businesses, loading: false });
           });
       }
+    }
+  }
+
+  renderBusinesses() {
+    if (this.state.loading) {
+      return (
+        <div>Loading...</div>
+      );    
+    } else {
+      return (
+        <BusinessList businesses={this.state.businesses} />
+      );
     }
   }
 
@@ -73,7 +86,7 @@ class Welcome extends Component {
         <div className="Welcome_search container">
           <SearchForm onSubmit={this.handleSubmit} lastSearch={this.state.lastSearch}/>
         </div>
-        <BusinessList businesses={this.state.businesses} />
+        {this.renderBusinesses()}
       </div>
     );
   }

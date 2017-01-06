@@ -35,7 +35,7 @@ class Profile extends Component {
     const { email, lastSearch, events } = this.props.user;
 
     return (
-      <div className="Profile">
+      <div className="Profile container">
         <h1>{email}</h1>
         <div>
           <span>Last search:</span>
@@ -44,6 +44,7 @@ class Profile extends Component {
         <div>
           <h2>My Events</h2>
           <div>
+            { events.length <= 0 ? <div>You haven't joined to any event</div> : null }
             {events.map(business => this.renderBusiness(business)) }
           </div>
         </div>
